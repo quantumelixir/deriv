@@ -1,4 +1,8 @@
 """ Python module to compute numerical derivatives of python code
+
+    Goal: To mimic all the functionality that is provided to numpy array
+    objects so that we can differentiate any python code that uses numpy
+    arrays.
 """
 
 import numpy
