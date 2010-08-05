@@ -38,12 +38,16 @@ def multi(t1, u1, alpha1, a1, v1, t2, u2, alpha2, a2, v2):
     elif t1 == 'ueqva' and t2 == 'aqevu':
         for k in range(1, len(u1)):
             u1[k] = alpha1 * sum(i*a1[i]*v1[k-i] for i in range(1, k + 1)) / k;
-            u2[k] = 1. * (k*a2[k] - sum(i*u2[i]*v2[k-i] for i in range(1, k))) / k / v2[0];
+            u2[k] = 1. * (k*a2[k] - sum(i*u2[i]*v2[k-i] for i in range(1, k))) \
+                    / k / v2[0];
     elif t1 == 'aeqvu' and t2 == 'ueqva':
         for k in range(1, len(u1)):
-            u1[k] = 1. * (k*a1[k] - sum(i*u1[i]*v1[k-i] for i in range(1, k))) / k / v1[0];
+            u1[k] = 1. * (k*a1[k] - sum(i*u1[i]*v1[k-i] for i in range(1, k))) \
+                    / k / v1[0];
             u2[k] = alpha2 * sum(i*a2[i]*v2[k-i] for i in range(1, k + 1)) / k;
     elif t1 == 'aeqvu' and t2 == 'aqevu':
         for k in range(1, len(u1)):
-            u1[k] = 1. * (k*a1[k] - sum(i*u1[i]*v1[k-i] for i in range(1, k))) / k / v1[0];
-            u2[k] = 1. * (k*a2[k] - sum(i*u2[i]*v2[k-i] for i in range(1, k))) / k / v2[0];
+            u1[k] = 1. * (k*a1[k] - sum(i*u1[i]*v1[k-i] for i in range(1, k))) \
+                    / k / v1[0];
+            u2[k] = 1. * (k*a2[k] - sum(i*u2[i]*v2[k-i] for i in range(1, k))) \
+                    / k / v2[0];

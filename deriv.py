@@ -34,7 +34,8 @@ class UTPS:
     def __add__ (self, other):
         if isinstance(other, UTPS):
             assert(len(self) == len(other))
-            return  self.__class__(self.coeffs + other.coeffs, self.coeffs.dtype)
+            return  self.__class__(self.coeffs + other.coeffs, \
+                    self.coeffs.dtype)
         ret = self.__class__(numpy.copy(self.coeffs), self.coeffs.dtype)
         ret.coeffs[0] += other
         return ret
@@ -42,7 +43,8 @@ class UTPS:
     def __sub__ (self, other):
         if isinstance(other, UTPS):
             assert(len(self) == len(other))
-            return  self.__class__(self.coeffs - other.coeffs, self.coeffs.dtype)
+            return  self.__class__(self.coeffs - other.coeffs, \
+                    self.coeffs.dtype)
         ret = self.__class__(numpy.copy(self.coeffs), self.coeffs.dtype)
         ret.coeffs[0] -= other
         return ret
@@ -50,13 +52,15 @@ class UTPS:
     def __mul__ (self, other):
         if isinstance(other, UTPS):
             assert(len(self) == len(other))
-            return  self.__class__(convolve(self.coeffs, other.coeffs), self.coeffs.dtype)
+            return  self.__class__(convolve(self.coeffs, other.coeffs), \
+                    self.coeffs.dtype)
         return self.__class__(self.coeffs * other, self.coeffs.dtype)
 
     def __div__ (self, other):
         if isinstance(other, UTPS):
             assert(len(self) == len(other))
-            return  self.__class__(deconvolve(self.coeffs, other.coeffs), self.coeffs.dtype)
+            return  self.__class__(deconvolve(self.coeffs, other.coeffs), \
+                    self.coeffs.dtype)
         return self.__class__(self.coeffs / other, self.coeffs.dtype)
 
     def __radd__ (self, other):
@@ -95,7 +99,8 @@ class Deriv(UTPS):
 
     def __getitem__ (self, index):
         assert(0 <= index < len(self))
-        return self.coeffs[index] * reduce(lambda x,y: x*y, range(1, index + 1), numpy.array(1, dtype=self.coeffs.dtype))
+        return self.coeffs[index] * reduce(lambda x,y: x*y, \
+                range(1, index + 1), numpy.array(1, dtype=self.coeffs.dtype))
 
     def __repr__ (self):
         """ Scale the Taylor coefficients to display derivatives """
@@ -117,13 +122,13 @@ if __name__ == "__main__":
 
     print 'Computing using AD:'
     x = Deriv.Variable(x0, ord + 1, 'complex64')
-    f = asin(x) * acosh(x) / (sin(x) - exp(x)) + x*x*tan(x)/(3 - log(x) + acosh(x))
+    f = asin(x) * acosh(x)/(sin(x) - exp(x)) + x*x*tan(x)/(3 - log(x)+acosh(x))
     print f
 
     print
     print 'Computing using sympy:'
     from sympy import *
     x = symbols('x')
-    f = asin(x) * acosh(x) / (sin(x) - exp(x)) + x*x*tan(x)/(3 - log(x) + acosh(x))
+    f = asin(x) * acosh(x)/(sin(x) - exp(x)) + x*x*tan(x)/(3 - log(x)+acosh(x))
     for i in range(ord + 1):
         print f.diff(x, i).subs(x, x0).n()
