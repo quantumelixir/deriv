@@ -1,1 +1,12 @@
 Automatic Differentiation for numpy arrays
+
+Demo (depends on python-sympy)
+----
+[19:21][deriv]$ python deriv.py 
+Computing using AD:
+Deriv([-1.59804046-0.09325923j  0.73088813+1.6490593j  -4.71163273-3.87130809j], Type=complex64)
+
+Computing using sympy:
+-1.59804032923798 - 0.0932591552845371*I
+0.730887708625599 + 1.64905924188799*I
+-4.71163159380204 - 3.87130780710239*I
