@@ -21,6 +21,15 @@ def log(x):
     aeqvu(u, a, a)
     return x.__class__(u, x.coeffs.dtype)
 
+def log10(x):
+    # a' = log(10) * au'
+    a = x.coeffs
+    u = zeros(len(a), dtype=a.dtype)
+    u[0] = numpy.log(a[0])
+    aeqvu(u, a, a)
+    u /= numpy.log(10)
+    return x.__class__(u, x.coeffs.dtype)
+
 def sin(x):
     a = x.coeffs
     [s, c] = _sincos(a)
