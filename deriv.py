@@ -6,8 +6,6 @@
 """
 
 import numpy
-
-# custom
 from mathfuncs import *
 
 class UTPS:
@@ -80,7 +78,7 @@ class UTPS:
 class Deriv(UTPS):
     """ Wrapper around UTPS for computing derivatives """
 
-    def __init__(self, coeffs, dtype):
+    def __init__(self, coeffs, dtype='float64'):
         UTPS.__init__(self, coeffs, dtype)
 
     @classmethod
